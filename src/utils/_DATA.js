@@ -136,13 +136,13 @@ function generateUID() {
 }
 
 export function _getUsers() {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => resolve({ ...users }), 1000);
   });
 }
 
 export function _getQuestions() {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => resolve({ ...questions }), 1000);
   });
 }
