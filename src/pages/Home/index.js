@@ -2,27 +2,31 @@ import { useEffect } from "react";
 import { connect } from "react-redux";
 import SelectUser from "../../components/SelectUser";
 import { handleFetchInitialData } from "../../redux/actions/shared";
-import { BackgroundImage } from "./backgroud";
+
 import * as S from "./styles";
 
+import { useLocation } from "react-router-dom";
+import WelcomeContainer from "./WelcomContainer";
 const Home = (props) => {
+  const { dispatch } = props;
   useEffect(() => {
-    props.dispatch(handleFetchInitialData());
-  }, []);
+    dispatch(handleFetchInitialData());
+  }, [dispatch]);
+
+  let location = useLocation();
 
   return (
-    <S.FlexContainer>
-      <S.WelcomeContainer>
-        <h2>Let's </h2>
-        <h3>Vote</h3>
-        <S.BackgroundContainer>
-          <BackgroundImage />
-        </S.BackgroundContainer>
-      </S.WelcomeContainer>
-      <S.LoginContainer>
-        <SelectUser />
-      </S.LoginContainer>
-    </S.FlexContainer>
+    <>
+      <S.FlexContainer>
+        <WelcomeContainer />
+        <S.LoginContainer>
+          {!!location.state.cameFromPrivateRoute && (
+            <S.Warning>Please login to access this page</S.Warning>
+          )}
+          <SelectUser />
+        </S.LoginContainer>
+      </S.FlexContainer>
+    </>
   );
 };
 

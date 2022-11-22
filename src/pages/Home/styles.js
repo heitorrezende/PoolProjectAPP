@@ -7,32 +7,6 @@ export const FlexContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const WelcomeContainer = styled.div`
-  background-color: url(vote.svg);
-  width: 100%;
-  height: 100%;
-  color: #9ab7c1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  font-family: "Alegreya", serif;
-
-  h2 {
-    margin: 3% 15% 1% 0;
-    font-size: 5rem;
-  }
-
-  h3 {
-    font-size: 5rem;
-    margin: 0 0% 3% 15%;
-  }
-`;
-
-export const BackgroundContainer = styled.div`
-  width: 50%;
-`;
 
 export const LoginContainer = styled.div`
   background-color: #9ab7c1;
@@ -42,4 +16,13 @@ export const LoginContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`;
+
+export const Warning = styled.div`
+  z-index: 1;
+  width: 100%;
+  margin: 15px auto;
+  text-align: center;
+  color: red;
+  font-size: 1.5rem;
 `;

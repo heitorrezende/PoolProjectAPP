@@ -1,27 +1,29 @@
 import { useState } from "react";
 import { connect } from "react-redux";
-import { addQuestion, handleAddQuestion } from "../../redux/actions/questions";
-import { saveQuestion } from "../../utils/api";
+import { handleAddQuestion } from "../../redux/actions/questions";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import * as S from "./styles";
+import ReturnToDashboard from "../../components/ReturnButton";
 
 const NewQuestion = (props) => {
   const [optionOne, setOptionOne] = useState("");
   const [optionTwo, setOptionTwo] = useState("");
   const { loggedUser, dispatch } = props;
-  console.log(props, "props");
+
   const question = {
     optionOneText: optionOne,
     optionTwoText: optionTwo,
     author: loggedUser,
   };
 
-  console.log(question, "question");
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // dispatch(addQuestion(newQuestion));
     dispatch(handleAddQuestion(question));
+    setOptionOne("");
+    setOptionTwo("");
   };
   const enableSubmit = optionOne && optionTwo;
 
@@ -48,6 +50,8 @@ const NewQuestion = (props) => {
           Submit
         </button>
       </S.NewQuestionForm>{" "}
+      <ToastContainer />
+      <ReturnToDashboard />
     </S.NewQuestionContainer>
   );
 };

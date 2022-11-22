@@ -2,17 +2,21 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 
+import "react-toastify/dist/ReactToastify.css";
+
 const PrivateRoute = ({ children, ...props }) => {
   const { loggedUser } = props.state;
-  console.log("loggedUser", loggedUser);
+
   const navigate = useNavigate();
   let location = useLocation();
 
   useEffect(() => {
     if (!loggedUser) {
-      return navigate("/", { state: { from: location } });
+      return navigate("/", {
+        state: { from: location, cameFromPrivateRoute: true },
+      });
     }
-  }, [loggedUser, navigate, location]);
+  }, [location, loggedUser, navigate]);
 
   if (loggedUser) return children;
 };

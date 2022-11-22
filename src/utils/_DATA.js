@@ -1,9 +1,10 @@
-let users = {
+export let users = {
   sarahedo: {
     id: "sarahedo",
     password: "password123",
     name: "Sarah Edo",
-    avatarURL: null,
+    avatarURL:
+      "https://gravatar.com/avatar/73b63530d5dec9a4fb2625af899495c1?s=400&d=robohash&r=x",
     answers: {
       "8xf0y6ziyjabvozdd253nd": "optionOne",
       "6ni6ok3ym7mf1p33lnez": "optionOne",
@@ -16,7 +17,8 @@ let users = {
     id: "tylermcginnis",
     password: "abc321",
     name: "Tyler McGinnis",
-    avatarURL: null,
+    avatarURL:
+      "https://gravatar.com/avatar/5542bff315abe05d66d9ebdbe326f094?s=400&d=robohash&r=pg",
     answers: {
       vthrdm985a262al8qx3do: "optionOne",
       xj352vofupe1dqz9emx13r: "optionTwo",
@@ -27,7 +29,8 @@ let users = {
     id: "mtsamis",
     password: "xyz123",
     name: "Mike Tsamis",
-    avatarURL: null,
+    avatarURL:
+      "https://gravatar.com/avatar/b2ed6eba6d3d41a753ae7016e1e9be8c?s=400&d=robohash&r=x",
     answers: {
       xj352vofupe1dqz9emx13r: "optionOne",
       vthrdm985a262al8qx3do: "optionTwo",
@@ -39,7 +42,8 @@ let users = {
     id: "zoshikanlu",
     password: "pass246",
     name: "Zenobia Oshikanlu",
-    avatarURL: null,
+    avatarURL:
+      "https://gravatar.com/avatar/12db47e727b5bbd83ea833881182e6db?s=400&d=robohash&r=x",
     answers: {
       xj352vofupe1dqz9emx13r: "optionOne",
     },
@@ -47,7 +51,7 @@ let users = {
   },
 };
 
-let questions = {
+export let questions = {
   "8xf0y6ziyjabvozdd253nd": {
     id: "8xf0y6ziyjabvozdd253nd",
     author: "sarahedo",
@@ -185,19 +189,19 @@ export function _saveQuestion(question) {
   });
 }
 
-export function _saveQuestionAnswer({ authedUser, qid, answer }) {
+export function _saveQuestionAnswer({ loggedUser, qid, answer }) {
   return new Promise((resolve, reject) => {
-    if (!authedUser || !qid || !answer) {
-      reject("Please provide authedUser, qid, and answer");
+    if (!loggedUser || !qid || !answer) {
+      reject("Please provide loggedUser, qid, and answer");
     }
 
     setTimeout(() => {
       users = {
         ...users,
-        [authedUser]: {
-          ...users[authedUser],
+        [loggedUser]: {
+          ...users[loggedUser],
           answers: {
-            ...users[authedUser].answers,
+            ...users[loggedUser].answers,
             [qid]: answer,
           },
         },
@@ -209,7 +213,7 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
           ...questions[qid],
           [answer]: {
             ...questions[qid][answer],
-            votes: questions[qid][answer].votes.concat([authedUser]),
+            votes: questions[qid][answer].votes.concat([loggedUser]),
           },
         },
       };

@@ -5,6 +5,17 @@ export const QuestionContainer = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
   border: 2px solid black;
+  width: 90%;
+  min-height: 30vh;
+
+  h3 {
+    width: 100%;
+    font-size: 3.5rem;
+    color: #cecece;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+  }
 `;
 
 export const QuestionPage = styled.div`

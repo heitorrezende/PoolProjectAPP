@@ -8,10 +8,12 @@ export const QuestionContainer = styled.div`
   font-family: "Alegreya", serif;
   color: #0f2b3d;
   font-weight: 800;
-  width: fit-content;
+  width: auto;
+  margin: 15px;
   h2 {
     margin: 10px 20px;
   }
+  border: 2px solid #dedede;
 `;
 
 export const ShowButton = styled.button`

@@ -1,8 +1,13 @@
 import * as S from "./styles";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
+import { handleAddAnswer } from "../../redux/actions/questions";
+
+import ReturnToDashboard from "../../components/ReturnButton";
+
 const Question = (props) => {
   let { question_id } = useParams();
+
   const currentQuestion = props.questions[question_id];
   const { loggedUser } = props;
   const userHasVoted1 = currentQuestion.optionOne.votes.includes(loggedUser);
@@ -17,11 +22,25 @@ const Question = (props) => {
     Math.round(
       (totalVotesOption1 / (totalVotesOption1 + totalVotesOption2)) * 1000
     ) / 10;
+
+  const handleClick = (vote, loggedUser, e) => {
+    e.preventDefault();
+
+    const answer = { loggedUser, qid: question_id, answer: vote };
+
+    props.dispatch(handleAddAnswer(answer));
+  };
+
   return (
     <S.QuestionContainer>
       <h1>Poll by {currentQuestion.author}</h1>
       <h2>Would you rather</h2>
-
+      <img
+        src={props.users[currentQuestion.author].avatarURL}
+        alt="User avatar"
+        width="300px"
+        height="300px"
+      />
       <S.ButtonContainer>
         {isAnswered ? (
           <>
@@ -50,23 +69,32 @@ const Question = (props) => {
           </>
         ) : (
           <>
-            <S.QuestionButton isAnswered={isAnswered}>
+            <S.QuestionButton
+              isAnswered={isAnswered}
+              onClick={(e) => handleClick("optionOne", loggedUser, e)}
+            >
               {currentQuestion.optionOne.text}
             </S.QuestionButton>
-            <S.QuestionButton isAnswered={isAnswered}>
+            <S.QuestionButton
+              isAnswered={isAnswered}
+              onClick={(e) => handleClick("optionTwo", loggedUser, e)}
+            >
               {currentQuestion.optionTwo.text}
             </S.QuestionButton>
           </>
         )}
       </S.ButtonContainer>
+
+      <ReturnToDashboard />
     </S.QuestionContainer>
   );
 };
 
-const mapStateToProps = ({ questions, loggedUser }) => {
+const mapStateToProps = ({ questions, loggedUser, users }) => {
   return {
     questions,
     loggedUser,
+    users,
   };
 };
 export default connect(mapStateToProps)(Question);

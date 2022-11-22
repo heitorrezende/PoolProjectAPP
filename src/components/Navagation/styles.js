@@ -8,7 +8,10 @@ export const NavBar = styled.nav`
   align-items: center;
   border-bottom: 2px solid #e7e9eb;
   margin-bottom: 1vh;
+
   ul {
+    width: 100vw;
+    list-style-type: none;
     display: flex;
     justify-content: flex-start;
     text-decoration: none;
@@ -24,5 +27,19 @@ export const NavBar = styled.nav`
     text-decoration: none;
     color: #9ab7c1;
     weight: 700;
+  }
+`;
+
+export const loggedUser = styled.span`
+  text-decoration: none;
+  weight: 700;
+  margin-right: 4%;
+  display: flex;
+  button {
+    margin: 0 1rem;
+    background: none;
+    border: 2px solid #9ab7c1;
+    color: #9ab7c1;
+    border-radius: 5px;
   }
 `;

@@ -1,4 +1,7 @@
 import { connect } from "react-redux";
+import * as S from "./styles";
+
+import ReturnToDashboard from "../../components/ReturnButton";
 
 const Leaderboard = (props) => {
   const sortedUsers = props.users.sort((a, b) => {
@@ -10,20 +13,38 @@ const Leaderboard = (props) => {
   });
 
   return (
-    <>
-      <h1>Leaderboard</h1>
-      {sortedUsers.map((user) => {
-        return (
-          <div>
-            <div>
-              {user.name} - {user.id}
-            </div>
-            <div>questions : {user.questions.length}</div>
-            <div>Answers {Object.keys(user.answers)?.length}</div>
-          </div>
-        );
-      })}
-    </>
+    <S.LeaderBoardPage>
+      <S.LeaderboardContainer>
+        <h1>Leaderboard</h1>
+        <S.LeaderboardCard>
+          <span>Name </span>
+          <span>Questions</span>
+          <span>Answers</span>
+        </S.LeaderboardCard>
+        {sortedUsers.map((user) => {
+          return (
+            <S.LeaderboardCard
+              loggedUser={props.loggedUser}
+              currentUser={user.id}
+            >
+              <span>
+                {user.name} - {user.id}{" "}
+                <img
+                  src={user.avatarURL}
+                  alt="user Avatar"
+                  width="40px"
+                  height="40px"
+                />
+              </span>
+              <span>{user.questions.length}</span>
+              <span>{Object.keys(user.answers)?.length}</span>
+            </S.LeaderboardCard>
+          );
+        })}
+      </S.LeaderboardContainer>
+
+      <ReturnToDashboard />
+    </S.LeaderBoardPage>
   );
 };
 

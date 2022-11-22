@@ -48,7 +48,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/newquestion",
+        path: "/add",
         element: (
           <PrivateRoute>
             <NewQuestion />

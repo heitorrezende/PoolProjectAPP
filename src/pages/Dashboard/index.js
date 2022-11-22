@@ -7,29 +7,35 @@ const Dashboard = (props) => {
 
   const sortedQuestions = questions.sort((a, b) => b.timestamp - a.timestamp);
   const answerdQuestions = sortedQuestions.filter((question) => {
-    return question.id in users[loggedUser].answers;
+    return question?.id in users[loggedUser].answers;
   });
 
   const unansweredQuestions = sortedQuestions.filter((question) => {
-    return !(question.id in users[loggedUser].answers);
+    return !(question?.id in users[loggedUser].answers);
   });
 
   return (
     <S.QuestionPage>
-      <h2> Questions</h2>
+      <h2>New Questions</h2>
       <S.QuestionContainer>
-        {!!unansweredQuestions &&
+        {unansweredQuestions.length ? (
           unansweredQuestions.map((question) => {
             return <Question key={question.id} question={question} />;
-          })}
+          })
+        ) : (
+          <h3>No New Questions</h3>
+        )}
       </S.QuestionContainer>
 
       <h2>Answerd Questions</h2>
       <S.QuestionContainer>
-        {!!answerdQuestions &&
+        {!!answerdQuestions ? (
           answerdQuestions.map((question) => {
             return <Question key={question.id} question={question} />;
-          })}
+          })
+        ) : (
+          <h3>No Answerd Questions</h3>
+        )}
       </S.QuestionContainer>
     </S.QuestionPage>
   );
