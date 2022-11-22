@@ -6,35 +6,16 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducer from "./redux/reducers";
 import middleware from "./redux/middlewares";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/Home";
-import Dashboard from "./pages/Dashboard";
-import ErrorPage from "./pages/Error";
-import PrivateRoute from "./Router/PrivateRoute";
+
+import CostumeRouter from "./Router";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const store = createStore(reducer, middleware);
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-    errorElement: <ErrorPage />,
-  },
-  {
-    path: "/dashboard",
-    element: (
-      <PrivateRoute>
-        <Dashboard />
-      </PrivateRoute>
-    ),
-  },
-]);
-
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router}></RouterProvider>
+      <CostumeRouter />
     </Provider>
   </React.StrictMode>
 );

@@ -2,18 +2,21 @@ import { connect } from "react-redux";
 import { setLoggedUser } from "../../redux/actions/loggedUser";
 import { useState } from "react";
 import * as S from "./styles";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SelectUser = (props) => {
   const { users, dispatch } = props;
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  let location = useLocation();
+
   const [selectedUser, setSelectedUser] = useState(null);
 
   const handleClick = () => {
     if (!selectedUser) return;
     dispatch(setLoggedUser(selectedUser));
-    navigate("/dashboard");
+    return navigate("/dashboard", { state: { from: location } });
   };
+
   return (
     <S.SelectUserContainer>
       <S.SelectUserTitle>Select your user</S.SelectUserTitle>
@@ -37,7 +40,8 @@ const SelectUser = (props) => {
   );
 };
 
-const mapStateToProps = ({ users }) => ({
-  users: users ? Object.values(users) : null,
-});
+const mapStateToProps = ({ users }) => {
+  return { users: users ? Object.values(users) : null };
+};
+
 export default connect(mapStateToProps)(SelectUser);

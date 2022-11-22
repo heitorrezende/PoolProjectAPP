@@ -1,14 +1,20 @@
-import { Navigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
+import { useEffect } from "react";
 
 const PrivateRoute = ({ children, ...props }) => {
   const { loggedUser } = props.state;
+  console.log("loggedUser", loggedUser);
+  const navigate = useNavigate();
+  let location = useLocation();
 
-  if (!loggedUser) {
-    return <Navigate to="/" />;
-  }
+  useEffect(() => {
+    if (!loggedUser) {
+      return navigate("/", { state: { from: location } });
+    }
+  }, [loggedUser, navigate, location]);
 
-  return children;
+  if (loggedUser) return children;
 };
 
 const mapStateToProps = (state = {}) => {
