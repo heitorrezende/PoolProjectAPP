@@ -28,7 +28,7 @@ const Leaderboard = (props) => {
               currentUser={user.id}
             >
               <span>
-                {user.name} - {user.id}{" "}
+                {user.name} - {user.id}
                 <img
                   src={user.avatarURL}
                   alt="user Avatar"

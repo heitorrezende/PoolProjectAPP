@@ -8,10 +8,10 @@ import * as S from "./styles";
 import { useLocation } from "react-router-dom";
 import WelcomeContainer from "./WelcomContainer";
 const Home = (props) => {
-  const { dispatch } = props;
+  const { dispatch, state } = props;
   useEffect(() => {
-    dispatch(handleFetchInitialData());
-  }, [dispatch]);
+    if (state === {}) dispatch(handleFetchInitialData());
+  }, [dispatch, state]);
 
   let location = useLocation();
 

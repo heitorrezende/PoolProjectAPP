@@ -1,3 +1,13 @@
+This is a project of a pool app for workers of a company to vote and see the leaderboard of who voted and crerted more questions.
+
+Once logged in the user can see all the questions he or she had answer on the dashboard along with all the new questions. You can check your score on the leaderboard page. Also, you can create new questions on the /new page.
+
+To access all pages of this app you must be firts loged in.
+
+To run the app firts use the npm install to get all the dependencies and then run the npm start to build the app.
+
+if you want to run the tests you can yse the npm run tests command.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
