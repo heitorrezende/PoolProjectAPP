@@ -9,8 +9,11 @@ import { useLocation } from "react-router-dom";
 import WelcomeContainer from "./WelcomContainer";
 const Home = (props) => {
   const { dispatch, state } = props;
+
   useEffect(() => {
-    if (state === {}) dispatch(handleFetchInitialData());
+    if (Object.keys(state.users).length === 0) {
+      dispatch(handleFetchInitialData());
+    }
   }, [dispatch, state]);
 
   let location = useLocation();
@@ -20,7 +23,7 @@ const Home = (props) => {
       <S.FlexContainer>
         <WelcomeContainer />
         <S.LoginContainer>
-          {!!location.state.cameFromPrivateRoute && (
+          {!!location?.state?.cameFromPrivateRoute && (
             <S.Warning>Please login to access this page</S.Warning>
           )}
           <SelectUser />
@@ -30,7 +33,7 @@ const Home = (props) => {
   );
 };
 
-const mapStateToProps = (state = {}) => {
+const mapStateToProps = (state) => {
   return { state };
 };
 export default connect(mapStateToProps)(Home);
